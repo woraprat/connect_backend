@@ -1,0 +1,89 @@
+<div class="container-fluid"> 
+   <div class="row"> 
+      <div class="col-md-6">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Title</th>
+              <th>Body</th>
+              <th>Status</th>
+              <th>Created</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tr *ngFor="let infos of info">
+            <td>{{infos.valueId}}</td>
+            <td>{{infos.valueTitle}}</td>
+            <td>{{infos.valueBody}}</td>
+            <td>{{infos.valueStatus}}</td>
+            <td>{{infos.valueCreated}}</td>
+            <td>
+              <button type="submit" (click) = "Ondelete(infos.valueId)">Delete</button>
+              <button type="submit" (click)="getDataid(infos.valueId)" data-toggle="modal" data-target="#myModal">Edit</button>
+              
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <h4>Add</h4>
+        <table>
+          <thead>
+            <tr>
+              <td>Title</td>
+              <td><input type="text" #title></td>
+            </tr>
+            <tr>
+              <td>Body</td>
+              <td><input type="text" #body></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td><input type="text" #status></td>
+              </tr>
+          </thead>
+        </table><br>
+        <button type="submit" (click)="Add(title.value,body.value,status.value)">Add</button>
+       
+      </div>
+    </div>
+  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content" *ngIf="info_only">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Edit</h4>
+            </div>
+            <div class="modal-body">
+                <table >
+                    <thead>
+
+                      <tr>
+                        <td>Title</td>
+                        <td><input type="text" #titleEdit value="{{ info_only.valueTitle }}"></td>
+                      </tr>
+                      <tr>
+                        <td>Body</td>
+                        <td><input type="text" #bodyEdit value="{{ info_only.valueBody }}"></td>
+                      </tr>
+                      <tr>
+                          <td>Status</td>
+                          <td><input type="text" #statusEdit value="{{ info_only.valueStatus }}"></td>
+                        </tr>
+                    </thead>
+                    <tr></tr>
+                  </table><br>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click) = "Onedit(info_only.valueId,titleEdit.value,bodyEdit.value,statusEdit.value)">Save</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
